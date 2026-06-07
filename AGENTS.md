@@ -67,3 +67,15 @@ something changes so future sessions have full context.
 - **At the start of a session:** Read this file to recall project context and prior decisions.
 - **When making changes:** Add a dated entry to the *Conversation Memory / Changelog* section.
 - **When a decision is made:** Update the relevant section (Tech Stack, Conventions, etc.).
+
+
+### 2026-06-07 (Project Scaffold)
+- Scaffolded a **Next.js 14 (App Router, TypeScript)** dashboard at the repo root.
+- **Frontend (Vercel-ready):** `app/page.tsx` high-converting hero + metric cards + newsfeed; `app/globals.css` dark theme; `app/layout.tsx`.
+- **Backend (Supabase):** `lib/supabase.ts` lazy client (`getSupabase()`), reads a `metrics` table; falls back to placeholder metrics until connected.
+- **Admin/content (Sanity):** `lib/sanity.ts` lazy client (`getSanity()`) + paginated GROQ `postsQuery`; `sanity/schema.ts` defines a `post` document (title, excerpt, mainImage, videoUrl, publishedAt).
+- **Extendable newsfeed:** `components/Newsfeed.tsx` (client) with "Load more" pagination calling `app/api/posts/route.ts` — feed extends downward as far as desired.
+- **Graceful degradation:** clients are lazy and all data fetches fall back to empty/placeholder so the app builds & runs before credentials are added.
+- **Env:** `.env.example` lists `NEXT_PUBLIC_SUPABASE_URL/ANON_KEY` and `NEXT_PUBLIC_SANITY_PROJECT_ID/DATASET/API_VERSION`.
+- Verified with `npm run build` (Next 14.2.35, bumped from 14.2.5 for the security patch). Build succeeds.
+- **To run locally:** copy `.env.example` to `.env.local`, fill values, then `npm install && npm run dev`.
