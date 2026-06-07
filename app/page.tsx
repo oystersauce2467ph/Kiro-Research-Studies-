@@ -1,4 +1,6 @@
 import Newsfeed from "@/components/Newsfeed";
+import MetricsGrid from "@/components/MetricsGrid";
+import ThemeToggle from "@/components/ThemeToggle";
 import { getSupabase, type Metric } from "@/lib/supabase";
 import { getSanity, postsQuery, type Post } from "@/lib/sanity";
 import { SAMPLE_POSTS } from "@/lib/sampleData";
@@ -45,6 +47,10 @@ export default async function Home() {
 
   return (
     <main className="container">
+      <div className="topbar">
+        <ThemeToggle />
+      </div>
+
       <section className="hero">
         <h1>Kiro Research Studies</h1>
         <p>Your live, high-converting dashboard. Data by Supabase, content by Sanity.</p>
@@ -53,14 +59,7 @@ export default async function Home() {
         </a>
       </section>
 
-      <section className="grid">
-        {metrics.map((m) => (
-          <div className="card" key={m.id}>
-            <div className="label">{m.label}</div>
-            <div className="value">{m.value.toLocaleString()}</div>
-          </div>
-        ))}
-      </section>
+      <MetricsGrid initialMetrics={metrics} />
 
       <section id="newsfeed">
         <h2 className="section-title">Newsfeed</h2>

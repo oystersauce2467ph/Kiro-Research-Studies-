@@ -99,3 +99,11 @@ something changes so future sessions have full context.
 - Bumped fallback metrics to realistic non-zero values.
 - Polish: post published-date display in `components/Newsfeed.tsx`, plus a site footer and `.post-date`/`.footer` styles in `globals.css`.
 - `npm run build` passes. Real Sanity/Supabase data automatically replaces demo data once env vars are set.
+
+
+### 2026-06-07 (Realtime + theme)
+- Added `components/MetricsGrid.tsx` (client): subscribes to Supabase realtime `postgres_changes` on `metrics` and refreshes cards live; shows a Live/Static badge.
+- Added `components/ThemeToggle.tsx` (client): dark/light toggle via `data-theme` on <html>, persisted in localStorage.
+- Wired both into `app/page.tsx` (topbar toggle + MetricsGrid replaces the static grid).
+- Added light-theme CSS variables + topbar/toggle/live-badge styles in `globals.css`.
+- `npm run build` passes. Realtime activates automatically once Supabase env vars are set and the table has realtime enabled (already in the migration).
