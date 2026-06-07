@@ -52,6 +52,13 @@ something changes so future sessions have full context.
 - Discussed the **10 most useful beginner MCP connectors** (see `SKILLS.md` → MCP Connectors for full pros/cons/conflicts): Filesystem, GitHub, Fetch, Brave Search, Context7, PostgreSQL/SQLite, Memory, Sequential Thinking, Playwright, and team tools (Slack/Notion/Linear).
 - Key guidance: **start with ~3 connectors** (code = GitHub, knowledge = Context7/Brave Search, specialized = DB/files); too many causes token bloat and tool confusion.
 - Recommended starter set for this project: **GitHub** (code), **Context7 or Brave Search** (knowledge), **Filesystem** (local editing on desktop IDE).
+- Defined the **project's intended 3-connector stack** matched to specific roles:
+  - **Frontend (live site + high-converting, extendable dashboard) → Vercel MCP** (`https://mcp.vercel.com`, OAuth). Alt: Netlify.
+  - **Backend SQL database (continuously updating) → Supabase MCP** (`@supabase/mcp-server-supabase`, Postgres + realtime). Alt: Neon.
+  - **Admin / content (pictures, videos, newsfeed) → Sanity MCP** (`https://mcp.sanity.io/mcp`, headless CMS, OAuth). Alt: Strapi / Contentful.
+- Architecture: Sanity (content) + Supabase (live data) feed → Vercel (live frontend) → users. Complementary, not conflicting.
+- Overlap rules: editorial media in Sanity, app/user data in Supabase; pick Vercel OR Netlify; Supabase for app-user auth, Sanity only for editor auth.
+- **Added `.kiro/settings/mcp.json`** to the repo pre-configuring all 3 connectors, plus `.kiro/settings/MCP_SETUP.md` with auth steps. Connectors still require the user's own accounts + OAuth/token to activate.
 
 ---
 

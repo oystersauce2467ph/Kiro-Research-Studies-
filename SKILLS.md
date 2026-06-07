@@ -62,6 +62,18 @@ token use, and tool confusion.
 
 > Note: On **Kiro Web** MCP is configured via Powers & MCP; the desktop IDE uses a JSON config listing each server.
 
+### This Project's Configured Stack (`.kiro/settings/mcp.json`)
+
+| Role | Connector | Endpoint / Package | Auth |
+|------|-----------|--------------------|------|
+| Frontend (live dashboard site) | **Vercel** | `https://mcp.vercel.com` | OAuth |
+| Backend SQL DB (live updates) | **Supabase** | `@supabase/mcp-server-supabase` | Personal Access Token |
+| Admin / content (images, video, newsfeed) | **Sanity** | `https://mcp.sanity.io/mcp` | OAuth |
+
+- Setup steps: see `.kiro/settings/MCP_SETUP.md`.
+- Data ownership rule: editorial media → Sanity; app/user data → Supabase.
+- The config defines the connectors; each must be authenticated with the user's own account before use. Keep real tokens out of Git.
+
 ---
 
 ## Changelog
@@ -70,3 +82,4 @@ token use, and tool confusion.
 - Created `SKILLS.md` to track project skills, tools, and workflows.
 - Initial skill recorded: maintaining persistent project memory.
 - Added **MCP Connectors (Beginner Guide)** section: 10 common connectors with pros/cons/conflicts and a recommended starter set.
+- Added **This Project's Configured Stack** section + `.kiro/settings/mcp.json` (Vercel + Supabase + Sanity) and `.kiro/settings/MCP_SETUP.md`.
