@@ -39,6 +39,26 @@ something changes so future sessions have full context.
 ### 2026-06-07
 - Created `AGENTS.md` and `SKILLS.md` to maintain persistent memory across chat sessions.
 - Established the rule: **these files must be updated whenever new changes are made** to the project.
+- Discussed the **Kiro Dev Pro plan** (~$20/month, 1,000 credits/month):
+  - Credits act like "fuel" for the AI; charged fractionally (0.01 increments), so simple tasks cost <1 credit and complex tasks cost more.
+  - Pro plan includes: Vibe mode, Spec mode, autonomous agent, GitHub integration, steering/memory files, MCP tools, and web access.
+  - Higher tiers exist: Pro+ ($40 / 2,000 credits), Power ($200 / 10,000 credits).
+- Defined **IDE (Integrated Development Environment)**: an all-in-one app for writing software (editor, file explorer, run/debug, terminal, smart help). Examples: VS Code, IntelliJ, PyCharm.
+- Explained how **IDE + Kiro + GitHub** work together:
+  - IDE = workspace where code is edited.
+  - Kiro = AI teammate that writes/fixes code and connects to GitHub (clone, branch, commit, open PRs).
+  - GitHub = cloud storage with version history for storing/sharing code.
+- Noted current environment is **Kiro Web** (browser-based, no file sidebar/editor); the Kiro desktop IDE provides the full local file-editing experience.
+- Discussed the **10 most useful beginner MCP connectors** (see `SKILLS.md` → MCP Connectors for full pros/cons/conflicts): Filesystem, GitHub, Fetch, Brave Search, Context7, PostgreSQL/SQLite, Memory, Sequential Thinking, Playwright, and team tools (Slack/Notion/Linear).
+- Key guidance: **start with ~3 connectors** (code = GitHub, knowledge = Context7/Brave Search, specialized = DB/files); too many causes token bloat and tool confusion.
+- Recommended starter set for this project: **GitHub** (code), **Context7 or Brave Search** (knowledge), **Filesystem** (local editing on desktop IDE).
+- Defined the **project's intended 3-connector stack** matched to specific roles:
+  - **Frontend (live site + high-converting, extendable dashboard) → Vercel MCP** (`https://mcp.vercel.com`, OAuth). Alt: Netlify.
+  - **Backend SQL database (continuously updating) → Supabase MCP** (`@supabase/mcp-server-supabase`, Postgres + realtime). Alt: Neon.
+  - **Admin / content (pictures, videos, newsfeed) → Sanity MCP** (`https://mcp.sanity.io/mcp`, headless CMS, OAuth). Alt: Strapi / Contentful.
+- Architecture: Sanity (content) + Supabase (live data) feed → Vercel (live frontend) → users. Complementary, not conflicting.
+- Overlap rules: editorial media in Sanity, app/user data in Supabase; pick Vercel OR Netlify; Supabase for app-user auth, Sanity only for editor auth.
+- **Added `.kiro/settings/mcp.json`** to the repo pre-configuring all 3 connectors, plus `.kiro/settings/MCP_SETUP.md` with auth steps. Connectors still require the user's own accounts + OAuth/token to activate.
 
 ---
 
@@ -47,3 +67,35 @@ something changes so future sessions have full context.
 - **At the start of a session:** Read this file to recall project context and prior decisions.
 - **When making changes:** Add a dated entry to the *Conversation Memory / Changelog* section.
 - **When a decision is made:** Update the relevant section (Tech Stack, Conventions, etc.).
+
+
+### 2026-06-07 (Project Scaffold)
+- Scaffolded a **Next.js 14 (App Router, TypeScript)** dashboard at the repo root.
+- **Frontend (Vercel-ready):** `app/page.tsx` high-converting hero + metric cards + newsfeed; `app/globals.css` dark theme; `app/layout.tsx`.
+- **Backend (Supabase):** `lib/supabase.ts` lazy client (`getSupabase()`), reads a `metrics` table; falls back to placeholder metrics until connected.
+- **Admin/content (Sanity):** `lib/sanity.ts` lazy client (`getSanity()`) + paginated GROQ `postsQuery`; `sanity/schema.ts` defines a `post` document (title, excerpt, mainImage, videoUrl, publishedAt).
+- **Extendable newsfeed:** `components/Newsfeed.tsx` (client) with "Load more" pagination calling `app/api/posts/route.ts` — feed extends downward as far as desired.
+- **Graceful degradation:** clients are lazy and all data fetches fall back to empty/placeholder so the app builds & runs before credentials are added.
+- **Env:** `.env.example` lists `NEXT_PUBLIC_SUPABASE_URL/ANON_KEY` and `NEXT_PUBLIC_SANITY_PROJECT_ID/DATASET/API_VERSION`.
+- Verified with `npm run build` (Next 14.2.35, bumped from 14.2.5 for the security patch). Build succeeds.
+- **To run locally:** copy `.env.example` to `.env.local`, fill values, then `npm install && npm run dev`.
+
+
+### 2026-06-07 (Backends + Manual)
+- Added **Supabase SQL migration** `supabase/migrations/0001_init_metrics.sql`: `metrics` table, `updated_at` trigger, public read RLS policy, realtime publication, and seed data.
+- Added **minimal Sanity Studio**: `sanity.config.ts`, `sanity.cli.ts`, `sanity/schemaTypes/index.ts`; `sanity/schema.ts` now uses `defineType`/`defineField`. Scripts `npm run studio` / `studio:deploy`.
+- Installed `sanity`, `@sanity/vision`, `styled-components`. `npm run build` still passes.
+- Added **`USER_MANUAL.md`**: beginner step-by-step to activate Supabase, Sanity, and Vercel, set the 5 env vars, run locally, connect the 3 MCP connectors, plus troubleshooting.
+- Env vars needed: `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`, `NEXT_PUBLIC_SANITY_PROJECT_ID`, `NEXT_PUBLIC_SANITY_DATASET`, `NEXT_PUBLIC_SANITY_API_VERSION`.
+
+
+### 2026-06-07 (README)
+- Rewrote `README.md` with a Quick Start that links to `USER_MANUAL.md`, plus env-var table, local run commands, project structure, and links to MCP setup + memory files.
+
+
+### 2026-06-07 (Demo content + polish)
+- Added `lib/sampleData.ts` with 7 demo newsfeed posts shown until Sanity is connected.
+- Wired sample posts into `app/page.tsx` (initial load) and `app/api/posts/route.ts` (paginated "Load more") so the feed and Load more work in demo mode.
+- Bumped fallback metrics to realistic non-zero values.
+- Polish: post published-date display in `components/Newsfeed.tsx`, plus a site footer and `.post-date`/`.footer` styles in `globals.css`.
+- `npm run build` passes. Real Sanity/Supabase data automatically replaces demo data once env vars are set.

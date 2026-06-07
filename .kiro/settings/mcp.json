@@ -1,0 +1,27 @@
+{
+  "mcpServers": {
+    "vercel": {
+      "command": "npx",
+      "args": ["-y", "mcp-remote", "https://mcp.vercel.com"],
+      "env": {},
+      "disabled": false,
+      "autoApprove": []
+    },
+    "supabase": {
+      "command": "npx",
+      "args": ["-y", "@supabase/mcp-server-supabase@latest"],
+      "env": {
+        "SUPABASE_ACCESS_TOKEN": "REPLACE_WITH_YOUR_SUPABASE_PERSONAL_ACCESS_TOKEN"
+      },
+      "disabled": false,
+      "autoApprove": []
+    },
+    "sanity": {
+      "command": "npx",
+      "args": ["-y", "mcp-remote", "https://mcp.sanity.io/mcp"],
+      "env": {},
+      "disabled": false,
+      "autoApprove": []
+    }
+  }
+}
