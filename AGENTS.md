@@ -49,6 +49,9 @@ something changes so future sessions have full context.
   - Kiro = AI teammate that writes/fixes code and connects to GitHub (clone, branch, commit, open PRs).
   - GitHub = cloud storage with version history for storing/sharing code.
 - Noted current environment is **Kiro Web** (browser-based, no file sidebar/editor); the Kiro desktop IDE provides the full local file-editing experience.
+- Discussed the **10 most useful beginner MCP connectors** (see `SKILLS.md` → MCP Connectors for full pros/cons/conflicts): Filesystem, GitHub, Fetch, Brave Search, Context7, PostgreSQL/SQLite, Memory, Sequential Thinking, Playwright, and team tools (Slack/Notion/Linear).
+- Key guidance: **start with ~3 connectors** (code = GitHub, knowledge = Context7/Brave Search, specialized = DB/files); too many causes token bloat and tool confusion.
+- Recommended starter set for this project: **GitHub** (code), **Context7 or Brave Search** (knowledge), **Filesystem** (local editing on desktop IDE).
 
 ---
 
