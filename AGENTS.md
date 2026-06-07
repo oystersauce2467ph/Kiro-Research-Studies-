@@ -39,6 +39,16 @@ something changes so future sessions have full context.
 ### 2026-06-07
 - Created `AGENTS.md` and `SKILLS.md` to maintain persistent memory across chat sessions.
 - Established the rule: **these files must be updated whenever new changes are made** to the project.
+- Discussed the **Kiro Dev Pro plan** (~$20/month, 1,000 credits/month):
+  - Credits act like "fuel" for the AI; charged fractionally (0.01 increments), so simple tasks cost <1 credit and complex tasks cost more.
+  - Pro plan includes: Vibe mode, Spec mode, autonomous agent, GitHub integration, steering/memory files, MCP tools, and web access.
+  - Higher tiers exist: Pro+ ($40 / 2,000 credits), Power ($200 / 10,000 credits).
+- Defined **IDE (Integrated Development Environment)**: an all-in-one app for writing software (editor, file explorer, run/debug, terminal, smart help). Examples: VS Code, IntelliJ, PyCharm.
+- Explained how **IDE + Kiro + GitHub** work together:
+  - IDE = workspace where code is edited.
+  - Kiro = AI teammate that writes/fixes code and connects to GitHub (clone, branch, commit, open PRs).
+  - GitHub = cloud storage with version history for storing/sharing code.
+- Noted current environment is **Kiro Web** (browser-based, no file sidebar/editor); the Kiro desktop IDE provides the full local file-editing experience.
 
 ---
 
