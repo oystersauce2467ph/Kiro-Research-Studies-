@@ -44,6 +44,15 @@ export default function Newsfeed({ initialPosts }: { initialPosts: Post[] }) {
           <div>
             <h3>{post.title}</h3>
             {post.excerpt && <p>{post.excerpt}</p>}
+            {post.publishedAt && (
+              <time className="post-date">
+                {new Date(post.publishedAt).toLocaleDateString(undefined, {
+                  year: "numeric",
+                  month: "short",
+                  day: "numeric",
+                })}
+              </time>
+            )}
           </div>
         </article>
       ))}

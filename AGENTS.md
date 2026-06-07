@@ -91,3 +91,11 @@ something changes so future sessions have full context.
 
 ### 2026-06-07 (README)
 - Rewrote `README.md` with a Quick Start that links to `USER_MANUAL.md`, plus env-var table, local run commands, project structure, and links to MCP setup + memory files.
+
+
+### 2026-06-07 (Demo content + polish)
+- Added `lib/sampleData.ts` with 7 demo newsfeed posts shown until Sanity is connected.
+- Wired sample posts into `app/page.tsx` (initial load) and `app/api/posts/route.ts` (paginated "Load more") so the feed and Load more work in demo mode.
+- Bumped fallback metrics to realistic non-zero values.
+- Polish: post published-date display in `components/Newsfeed.tsx`, plus a site footer and `.post-date`/`.footer` styles in `globals.css`.
+- `npm run build` passes. Real Sanity/Supabase data automatically replaces demo data once env vars are set.
