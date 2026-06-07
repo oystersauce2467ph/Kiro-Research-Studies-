@@ -79,3 +79,11 @@ something changes so future sessions have full context.
 - **Env:** `.env.example` lists `NEXT_PUBLIC_SUPABASE_URL/ANON_KEY` and `NEXT_PUBLIC_SANITY_PROJECT_ID/DATASET/API_VERSION`.
 - Verified with `npm run build` (Next 14.2.35, bumped from 14.2.5 for the security patch). Build succeeds.
 - **To run locally:** copy `.env.example` to `.env.local`, fill values, then `npm install && npm run dev`.
+
+
+### 2026-06-07 (Backends + Manual)
+- Added **Supabase SQL migration** `supabase/migrations/0001_init_metrics.sql`: `metrics` table, `updated_at` trigger, public read RLS policy, realtime publication, and seed data.
+- Added **minimal Sanity Studio**: `sanity.config.ts`, `sanity.cli.ts`, `sanity/schemaTypes/index.ts`; `sanity/schema.ts` now uses `defineType`/`defineField`. Scripts `npm run studio` / `studio:deploy`.
+- Installed `sanity`, `@sanity/vision`, `styled-components`. `npm run build` still passes.
+- Added **`USER_MANUAL.md`**: beginner step-by-step to activate Supabase, Sanity, and Vercel, set the 5 env vars, run locally, connect the 3 MCP connectors, plus troubleshooting.
+- Env vars needed: `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`, `NEXT_PUBLIC_SANITY_PROJECT_ID`, `NEXT_PUBLIC_SANITY_DATASET`, `NEXT_PUBLIC_SANITY_API_VERSION`.

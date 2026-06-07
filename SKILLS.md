@@ -83,3 +83,9 @@ token use, and tool confusion.
 - Initial skill recorded: maintaining persistent project memory.
 - Added **MCP Connectors (Beginner Guide)** section: 10 common connectors with pros/cons/conflicts and a recommended starter set.
 - Added **This Project's Configured Stack** section + `.kiro/settings/mcp.json` (Vercel + Supabase + Sanity) and `.kiro/settings/MCP_SETUP.md`.
+
+
+### 2026-06-07 (Backends + Manual)
+- Added Supabase SQL migration (metrics table + RLS + realtime + seed) under `supabase/migrations/`.
+- Added Sanity Studio admin config (`sanity.config.ts`, `sanity.cli.ts`, schema index); run with `npm run studio`.
+- Added `USER_MANUAL.md` — beginner activation guide for the 3 connectors (Vercel, Supabase, Sanity).
