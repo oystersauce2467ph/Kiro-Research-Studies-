@@ -87,3 +87,7 @@ something changes so future sessions have full context.
 - Installed `sanity`, `@sanity/vision`, `styled-components`. `npm run build` still passes.
 - Added **`USER_MANUAL.md`**: beginner step-by-step to activate Supabase, Sanity, and Vercel, set the 5 env vars, run locally, connect the 3 MCP connectors, plus troubleshooting.
 - Env vars needed: `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`, `NEXT_PUBLIC_SANITY_PROJECT_ID`, `NEXT_PUBLIC_SANITY_DATASET`, `NEXT_PUBLIC_SANITY_API_VERSION`.
+
+
+### 2026-06-07 (README)
+- Rewrote `README.md` with a Quick Start that links to `USER_MANUAL.md`, plus env-var table, local run commands, project structure, and links to MCP setup + memory files.
